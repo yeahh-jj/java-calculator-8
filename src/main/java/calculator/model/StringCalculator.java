@@ -55,7 +55,6 @@ public class StringCalculator {
             }
 
             int value;
-            value = Integer.parseInt(number);
             try{
                 value = Integer.parseInt(number);
             }catch(NumberFormatException e) {
