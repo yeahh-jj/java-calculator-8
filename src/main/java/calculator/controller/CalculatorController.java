@@ -14,7 +14,7 @@ public class CalculatorController {
             view.outValue(result);
         }catch(IllegalArgumentException e) {
             view.printError(e.getMessage());
-            return;
+            throw e;
         }
     }
 }
