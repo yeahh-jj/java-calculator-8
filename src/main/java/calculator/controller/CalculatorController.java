@@ -8,10 +8,13 @@ public class CalculatorController {
     private StringCalculator stringCalculator = new StringCalculator();
 
     public void run() {
-        String input = view.inputValue();
-        int result = stringCalculator.calculate(input);
-        view.outValue(result);
+        try{
+            String input = view.inputValue();
+            int result = stringCalculator.calculate(input);
+            view.outValue(result);
+        }catch(IllegalArgumentException e) {
+            view.printError(e.getMessage());
+        }
     }
-
 
 }

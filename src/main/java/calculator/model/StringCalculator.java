@@ -23,7 +23,6 @@ public class StringCalculator {
     
     private String[] splitWithDefaultDelimiter(String inputValue) {
         String defaultDelimiter = ",|:";
-        // System.out.println(Arrays.toString(inputValue.split(defaultDelimiter)));
         return inputValue.split(defaultDelimiter);
     }
     
@@ -37,10 +36,28 @@ public class StringCalculator {
     
     private int sum(String[] numbers) {
         int total = 0;
+
         for(String number : numbers) {
-            total += Integer.parseInt(number);
-            System.out.println(total);
+            number = number.trim();
+            
+            if(number.isBlank()) {
+                throw new IllegalArgumentException("빈 값이 포함되어 있습니다.");
+            }
+
+            int value;
+            try{
+                value = Integer.parseInt(number);
+            }catch(NumberFormatException e) {
+                throw new IllegalArgumentException("숫자가 아닌 값이 포함되어 있습니다. (" + number +")");
+            }
+
+            if(value < 0) {
+                throw new IllegalArgumentException("음수가 포함되어 있습니다.");
+            }
+
+            total += value;
         }
+
         return total;
     }
 }

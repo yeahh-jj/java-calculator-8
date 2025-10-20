@@ -12,4 +12,8 @@ public class View {
     public void outValue(int result) {
         System.out.println("결과 : " + result);
     }
+
+    public void printError(String message) {
+        System.out.println("입력 오류:" + message);
+    }
 }
