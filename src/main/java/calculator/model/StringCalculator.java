@@ -1,7 +1,5 @@
 package calculator.model;
 
-import java.util.Arrays;
-
 public class StringCalculator {
 
     public int calculate(String inputValue) {
@@ -15,7 +13,7 @@ public class StringCalculator {
 
     private String[] splitNumbers(String inputValue) {
         inputValue = inputValue.replace("\\n", "\n");
-
+        
         if(inputValue.startsWith("//")) {
             return splitWithCustomDelimiter(inputValue);
         }
@@ -39,6 +37,10 @@ public class StringCalculator {
     
     private int sum(String[] numbers) {
         int total = 0;
+        for(String number : numbers) {
+            total += Integer.parseInt(number);
+            System.out.println(total);
+        }
         return total;
     }
 }
