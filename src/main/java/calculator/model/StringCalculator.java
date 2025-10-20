@@ -1,5 +1,7 @@
 package calculator.model;
 
+import java.util.regex.Pattern;
+
 public class StringCalculator {
 
     public int calculate(String inputValue) {
@@ -12,8 +14,6 @@ public class StringCalculator {
     }
 
     private String[] splitNumbers(String inputValue) {
-        inputValue = inputValue.replace("\\n", "\n");
-        
         if(inputValue.startsWith("//")) {
             return splitWithCustomDelimiter(inputValue);
         }
@@ -27,11 +27,18 @@ public class StringCalculator {
     }
     
     private String[] splitWithCustomDelimiter(String inputValue) {
+        inputValue = inputValue.replace("\\n", "\n");
+        
         int delimiterEndIdx = inputValue.indexOf("\n");
+        if(delimiterEndIdx == -1) {
+            throw new IllegalArgumentException("잘못된 구분자 형식입니다.");
+        }
+
         String customDelimiter = inputValue.substring(2, delimiterEndIdx);
         String numbersPart = inputValue.substring(delimiterEndIdx + 1);
 
-        return numbersPart.split(customDelimiter);
+        String safeDelimiter = Pattern.quote(customDelimiter);
+        return numbersPart.split(safeDelimiter);
     }
     
     private int sum(String[] numbers) {
@@ -45,6 +52,7 @@ public class StringCalculator {
             }
 
             int value;
+            value = Integer.parseInt(number);
             try{
                 value = Integer.parseInt(number);
             }catch(NumberFormatException e) {
