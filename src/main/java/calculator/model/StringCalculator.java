@@ -37,8 +37,11 @@ public class StringCalculator {
         String customDelimiter = inputValue.substring(2, delimiterEndIdx);
         String numbersPart = inputValue.substring(delimiterEndIdx + 1);
 
+        String defaultDelimiter = ",|:";
         String safeDelimiter = Pattern.quote(customDelimiter);
-        return numbersPart.split(safeDelimiter);
+        String allDelimiters = defaultDelimiter + "|" + safeDelimiter;
+
+        return numbersPart.split(allDelimiters);
     }
     
     private int sum(String[] numbers) {
